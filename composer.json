@@ -1,6 +1,6 @@
 {
     "name": "cleup/cache",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Flexible caching library for PHP with multiple drivers support",
     "type": "library",
     "license": "MIT",
