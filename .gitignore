@@ -1,0 +1,6 @@
+coverage
+test-app
+tests
+composer.lock
+.phpunit.result.cache
+vendor
