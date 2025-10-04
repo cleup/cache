@@ -11,6 +11,7 @@ class Cache
 
     /**
      * Cache constructor
+     * 
      * @param CacheDriverInterface $driver Cache driver instance
      * @param string $namespace Cache namespace
      */
@@ -24,6 +25,7 @@ class Cache
 
     /**
      * Get value from cache
+     * 
      * @param string $key Cache key
      * @return mixed Cached value or null
      */
@@ -34,6 +36,7 @@ class Cache
 
     /**
      * Store value in cache
+     * 
      * @param string $key Cache key
      * @param mixed $value Value to store
      * @param int|null $ttl Time to live in seconds
@@ -46,6 +49,7 @@ class Cache
 
     /**
      * Get value or store default if not exists
+     * 
      * @param string $key Cache key
      * @param callable $callback Default value callback
      * @param int|null $ttl Time to live in seconds
@@ -67,6 +71,7 @@ class Cache
 
     /**
      * Get value and delete it
+     * 
      * @param string $key Cache key
      * @return mixed Cached value or null
      */
@@ -79,6 +84,7 @@ class Cache
 
     /**
      * Store value only if key doesn't exist
+     * 
      * @param string $key Cache key
      * @param mixed $value Value to store
      * @param int|null $ttl Time to live in seconds
@@ -95,6 +101,7 @@ class Cache
 
     /**
      * Store value forever (no expiration)
+     * 
      * @param string $key Cache key
      * @param mixed $value Value to store
      * @return bool Success status
@@ -106,6 +113,7 @@ class Cache
 
     /**
      * Delete value from cache
+     * 
      * @param string $key Cache key
      * @return bool Success status
      */
@@ -125,6 +133,7 @@ class Cache
 
     /**
      * Check if key exists in cache
+     * 
      * @param string $key Cache key
      * @return bool Existence status
      */
@@ -135,6 +144,7 @@ class Cache
 
     /**
      * Get multiple values from cache
+     * 
      * @param array $keys Array of cache keys
      * @return array Key-value pairs
      */
@@ -159,6 +169,7 @@ class Cache
 
     /**
      * Store multiple values in cache
+     * 
      * @param array $values Key-value pairs
      * @param int|null $ttl Time to live in seconds
      * @return bool Success status
@@ -175,6 +186,7 @@ class Cache
 
     /**
      * Delete multiple values from cache
+     * 
      * @param array $keys Array of cache keys
      * @return bool Success status
      */
@@ -190,6 +202,7 @@ class Cache
 
     /**
      * Increment numeric value
+     * 
      * @param string $key Cache key
      * @param int $value Increment amount
      * @return int|false New value or false on failure
@@ -201,6 +214,7 @@ class Cache
 
     /**
      * Decrement numeric value
+     * 
      * @param string $key Cache key
      * @param int $value Decrement amount
      * @return int|false New value or false on failure
@@ -212,6 +226,7 @@ class Cache
 
     /**
      * Get cache statistics
+     * 
      * @return array Statistics data
      */
     public function getStats(): array
@@ -221,6 +236,7 @@ class Cache
 
     /**
      * Get underlying driver instance
+     * 
      * @return CacheDriverInterface Driver instance
      */
     public function getDriver(): CacheDriverInterface
@@ -230,6 +246,7 @@ class Cache
 
     /**
      * Set cache namespace
+     * 
      * @param string $namespace Namespace
      * @return self
      */
@@ -241,6 +258,7 @@ class Cache
 
     /**
      * Add namespace to key
+     * 
      * @param string $key Original key
      * @return string Namespaced key
      */
