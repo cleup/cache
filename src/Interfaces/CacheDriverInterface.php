@@ -1,4 +1,5 @@
 <?php
+
 namespace Cleup\Cache\Interfaces;
 
 interface CacheDriverInterface
@@ -100,4 +101,11 @@ interface CacheDriverInterface
      * @return bool Connection status
      */
     public function isConnected(): bool;
+
+    /**
+     * Get the storage path (for the local driver only)
+     * 
+     * @return string Full storage path
+     */
+    public function getStoragePath(): string;
 }

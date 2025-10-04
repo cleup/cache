@@ -342,16 +342,6 @@ class LocalDriver extends AbstractDriver
     }
 
     /**
-     * Get the storage path
-     * 
-     * @return string Full storage path
-     */
-    public function getStoragePath(): string
-    {
-        return $this->config['storage_path'];
-    }
-
-    /**
      * Generate filename for cache key
      * 
      * @param string $key Cache key

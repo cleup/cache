@@ -63,4 +63,14 @@ abstract class AbstractDriver implements CacheDriverInterface
         $this->config['default_ttl'] = $ttl;
         return $this;
     }
+
+    /**
+     * Get the storage path (for the local driver only)
+     * 
+     * @return string Full storage path
+     */
+    public function getStoragePath(): string
+    {
+        return $this->config['storage_path'] ?? '';
+    }
 }

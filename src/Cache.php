@@ -156,14 +156,14 @@ class Cache
         );
 
         $results = $this->driver->getMultiple($namespacedKeys);
-        
+
         // Map results back to original keys
         $mappedResults = [];
         foreach ($keys as $key) {
             $namespacedKey = $this->addNamespace($key);
             $mappedResults[$key] = $results[$namespacedKey] ?? null;
         }
-        
+
         return $mappedResults;
     }
 
@@ -308,5 +308,15 @@ class Cache
     public function __unset(string $key): void
     {
         $this->delete($key);
+    }
+
+    /**
+     * Get the storage path (for the local driver only)
+     * 
+     * @return string Full storage path
+     */
+    public function getStoragePath(): string
+    {
+        return $this->driver->getStoragePath();
     }
 }
