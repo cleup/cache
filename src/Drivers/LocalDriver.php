@@ -195,6 +195,34 @@ class LocalDriver extends AbstractDriver
     }
 
     /**
+     * Find cache files
+     * 
+     * @param string $path
+     * @param array $files
+     * @return array
+     */
+    private function findFiles($path, array &$files = []): array
+    {
+        $separator = DIRECTORY_SEPARATOR;
+        $scan = array_diff(
+            scandir($path),
+            array('.', '..')
+        );
+
+        foreach ($scan as $file) {
+            $fullPath = $path . $separator . $file;
+
+            if (is_dir($fullPath)) {
+                $this->findFiles($path . $separator . $file . $separator, $files);
+            } else {
+                $files[] = $path . $separator . $file;
+            }
+        }
+
+        return $files;
+    }
+
+    /**
      * Clear all cache items
      * 
      * @return bool Success status
@@ -202,10 +230,9 @@ class LocalDriver extends AbstractDriver
     public function clear(): bool
     {
         $this->memoryCache = [];
-        $pattern = $this->config['storage_path'] . '/*' . $this->config['file_extension'];
-        $files = glob($pattern);
-
+        $files = $this->findFiles($this->config['storage_path']);
         $success = true;
+
         foreach ($files as $file) {
             if (is_file($file) && !unlink($file)) {
                 $success = false;
