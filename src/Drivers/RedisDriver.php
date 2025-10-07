@@ -17,6 +17,11 @@ class RedisDriver extends AbstractDriver
     private bool $isConnected = false;
 
     /**
+     * @var array $type Driver type
+     */
+    protected string $type = 'redis';
+
+    /**
      * RedisDriver constructor
      * 
      * @param array $config Configuration options

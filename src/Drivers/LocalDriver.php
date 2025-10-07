@@ -12,6 +12,11 @@ class LocalDriver extends AbstractDriver
     private array $memoryCache = [];
 
     /**
+     * @var array $type Driver type
+     */
+    protected string $type = 'local';
+
+    /**
      * LocalDriver constructor
      * 
      * @param array $config Configuration options

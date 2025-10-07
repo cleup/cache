@@ -17,6 +17,11 @@ class MemcachedDriver extends AbstractDriver
     private bool $isConnected = false;
 
     /**
+     * @var array $type Driver type
+     */
+    protected string $type = 'memcached';
+
+    /**
      * MemcachedDriver constructor
      * 
      * @param array $config Configuration options
