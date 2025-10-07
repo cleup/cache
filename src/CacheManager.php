@@ -7,6 +7,7 @@ use Cleup\Cache\Drivers\LocalDriver;
 use Cleup\Cache\Drivers\RedisDriver;
 use Cleup\Cache\Drivers\MemcachedDriver;
 use Cleup\Cache\Exceptions\CacheException;
+use Cleup\Cache\Interfaces\CacheInterface;
 
 class CacheManager
 {
@@ -14,6 +15,11 @@ class CacheManager
      * @var array $drivers
      */
     private static array $drivers = [];
+
+    /**
+     * @var array $unnamedInstances
+     */
+    private static array $unnamedInstances  = [];
 
     /**
      * @var string $defaultDriver
@@ -48,7 +54,7 @@ class CacheManager
                 $driver->defaultTtl($driverConfig['default_ttl']);
             }
 
-            static::$drivers[$name] = new Cache($driver);
+            static::$drivers[$name] = new Cache($driver, '', false);
         }
 
         // Set default driver if specified in config
@@ -58,13 +64,43 @@ class CacheManager
     }
 
     /**
+     * Get all drivers
+     * 
+     * @return array Driver list
+     */
+    public static function getDrivers(): array
+    {
+        return static::$drivers;
+    }
+
+    /**
+     * Add instances without a name
+     * 
+     * @return array List of instances
+     */
+    public static function getUnnamedInstances(): array
+    {
+        return static::$unnamedInstances;
+    }
+
+    /**
+     * Add an unnamed driver
+     * 
+     * @param
+     */
+    public static function addUnnamedInstance(CacheInterface $instance): void
+    {
+        static::$unnamedInstances[] = $instance;
+    }
+
+    /**
      * Get driver by name
      * 
      * @param string|null $name Driver name
-     * @return Cache Cache instance
+     * @return CacheInterface Cache instance
      * @throws CacheException
      */
-    public static function driver(string $name = null): Cache
+    public static function driver(string $name = null): CacheInterface
     {
         $name = $name ?: static::$defaultDriver;
 
@@ -112,10 +148,10 @@ class CacheManager
      * Create default driver instance
      * 
      * @param string $name Driver name
-     * @return Cache Cache instance
+     * @return CacheInterface Cache instance
      * @throws CacheException
      */
-    private static function createDefaultDriver(string $name): Cache
+    private static function createDefaultDriver(string $name): CacheInterface
     {
         $driver = static::createDriver($name, []);
 

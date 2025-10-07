@@ -108,4 +108,11 @@ interface CacheDriverInterface
      * @return string Full storage path
      */
     public function getStoragePath(): string;
+
+    /**
+     * Get the driver type
+     * 
+     * @return string
+     */
+    public function getType(): string;
 }

@@ -3,10 +3,18 @@
 namespace Cleup\Cache;
 
 use Cleup\Cache\Interfaces\CacheDriverInterface;
+use Cleup\Cache\Interfaces\CacheInterface;
 
-class Cache
+class Cache implements CacheInterface
 {
+    /**
+     * @var CacheDriverInterface $driver
+     */
     private CacheDriverInterface $driver;
+
+    /**
+     * @var string $namespace - Cache namespace
+     */
     private string $namespace;
 
     /**
@@ -17,10 +25,15 @@ class Cache
      */
     public function __construct(
         CacheDriverInterface $driver,
-        string $namespace = 'app'
+        string $namespace = 'app',
+        private bool $unnamed = true
     ) {
         $this->driver = $driver;
         $this->namespace = $namespace;
+        $this->unnamed = $unnamed;
+
+        if ($unnamed)
+            CacheManager::addUnnamedInstance($this);
     }
 
     /**
@@ -124,6 +137,7 @@ class Cache
 
     /**
      * Clear all cache
+     * 
      * @return bool Success status
      */
     public function clear(): bool
@@ -318,5 +332,25 @@ class Cache
     public function getStoragePath(): string
     {
         return $this->driver->getStoragePath();
+    }
+
+    /**
+     * Get the driver type
+     * 
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->driver->getType();
+    }
+
+    /**
+     * If the instance does not have a code name in the cache manager
+     * 
+     * @return bool
+     */
+    public function isUnnamed(): bool
+    {
+        return $this->unnamed;
     }
 }

@@ -73,4 +73,14 @@ abstract class AbstractDriver implements CacheDriverInterface
     {
         return $this->config['storage_path'] ?? '';
     }
+
+    /**
+     * Get the driver type
+     * 
+     * @return string
+     */
+    public function getType(): string
+    {
+        return $this->type ?? 'local';
+    }
 }
